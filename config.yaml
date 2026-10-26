@@ -1,0 +1,20 @@
+# All money settings in USD. Paper trading only by default.
+universe: [SPY, QQQ, IWM, DIA, XLK, XLF, XLE, XLV, XLY, XLI]
+strategy: rsi2_meanrev        # rsi2_meanrev | sma_trend
+starting_capital: 10000
+
+risk:
+  risk_per_trade: 0.01        # lose at most 1% of equity if a stop is hit
+  atr_stop_mult: 2.0          # stop = entry - 2 x ATR(14)
+  max_positions: 5
+  max_position_pct: 0.25      # no single position above 25% of equity
+  daily_loss_limit: 0.02      # stop opening trades for the day after -2%
+  max_drawdown_kill: 0.15     # halt the bot entirely after -15% from peak
+
+costs:
+  commission_per_share: 0.0   # Alpaca stock trades are commission free
+  slippage_bps: 5             # assume 0.05% worse fills each side
+
+broker:
+  name: alpaca
+  paper: true                 # never set false without a deliberate decision

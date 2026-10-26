@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+data/
+*.csv
+bot.log
+cron.log
+state.json
+.env
