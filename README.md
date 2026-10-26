@@ -18,6 +18,12 @@ python run_backtest.py --synthetic                     # fake data, plumbing che
 ```
 Outputs a stats table plus `equity_curve.csv` and `trades.csv`.
 
+### Compare strategies (in-sample vs out-of-sample)
+```bash
+python run_compare.py --download --start 2010-01-01   # tests on 2010-2019, then checks 2020+ unseen
+```
+Only paper trade a strategy that still holds up out of sample.
+
 ## Paper trade with Alpaca
 1. Create a free account at https://app.alpaca.markets, switch to **Paper Trading**, generate API keys.
 2. Run:
