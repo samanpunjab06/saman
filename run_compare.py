@@ -51,6 +51,23 @@ for name in STRATEGIES:
         rows.append({"strategy": name, "period": period, **{k: st[k] for k in (
             "cagr_pct", "max_drawdown_pct", "sharpe", "trades", "win_rate_pct", "avg_profit_per_trading_day")}})
 
+# benchmark: buy and hold SPY (or the first symbol) over the same periods
+bench = "SPY" if "SPY" in data else next(iter(data))
+for period, d in periods.items():
+    if bench not in d or len(d[bench]) < 260:
+        continue
+    c = d[bench]["close"]
+    if period == "out-of-sample":
+        c = c[c.index >= split]
+    years = len(c) / 252
+    eq = c / c.iloc[0]
+    rows.append({"strategy": f"buy&hold {bench}", "period": period,
+                 "cagr_pct": round(((eq.iloc[-1]) ** (1 / years) - 1) * 100, 2),
+                 "max_drawdown_pct": round(float((eq / eq.cummax() - 1).min()) * 100, 2),
+                 "sharpe": round(float(c.pct_change().mean() / c.pct_change().std() * 252 ** 0.5), 2),
+                 "trades": 1, "win_rate_pct": float("nan"),
+                 "avg_profit_per_trading_day": round(float((eq.iloc[-1] - 1) * cfg["starting_capital"] / len(c)), 2)})
+
 table = pd.DataFrame(rows)
 print(f"Capital ${cfg['starting_capital']:,}   split at {a.split}\n")
 print(table.to_string(index=False))
