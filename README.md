@@ -42,3 +42,9 @@ Never commit your API keys.
 ```bash
 python -m pytest -q
 ```
+
+## Aggressive experiment (paper only)
+`config_aggressive.yaml` trades leveraged ETFs with 3x the risk per trade. Expect much bigger swings and a real chance of losing most of the account. Test it with:
+```bash
+py run_compare.py --config config_aggressive.yaml --download
+```

@@ -1,0 +1,21 @@
+# EXPERIMENT ONLY. Paper trading / backtests, never real money.
+# Leveraged ETFs and 3x the risk per trade: bigger wins AND much bigger losses.
+universe: [TQQQ, SOXL, UPRO, TECL, SPXL, FNGU, TNA, LABU]
+strategy: sma_trend
+starting_capital: 10000
+
+risk:
+  risk_per_trade: 0.03
+  atr_stop_mult: 2.5
+  max_positions: 3
+  max_position_pct: 0.40
+  daily_loss_limit: 0.06
+  max_drawdown_kill: 0.40
+
+costs:
+  commission_per_share: 0.0
+  slippage_bps: 10
+
+broker:
+  name: alpaca
+  paper: true
